@@ -1,22 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import './BinanceSignIn.scss'
 import axios from 'axios';
+import BinanceBids from './BinanceBids';
 
-function BinanceApi(props) {
+function BinanceApi() {
 
-  const [coins, setCoins] = useState([]);
+  const [history, setHistory] = useState([]);
 
   useEffect(() => {
-    axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false')
-    .then(res => {
-      setCoins (res.data);
-      //console.log(res.data);
-    })
-  })
+    const interval = setInterval(() => {
+      axios.get(
+          'https://api.binance.com/api/v3/depth?symbol=BTCUSDT')
+        .then(res => {
+          setHistory(res.data);
+          console.log(res.data);
+        }).catch(error => console.log(error));
+    }, 500);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div>
-      <p>Hello!</p>
+    <div className='price-change'>
+      <div>
+        <h1>Bid</h1>
+        {history.bids && history.bids.slice(0,10).map(bid => {
+          return (<BinanceBids
+            price={Number(bid[0]).toFixed(2)}
+            amount={Number(bid[1]).toFixed(5)}
+          />);
+        })}
+      </div>
+      <div>
+        <h1>Ask</h1>
+        {history.asks && history.asks.slice(0,10).map(bid => {
+          return (<BinanceBids
+            price={Number(bid[0]).toFixed(2)}
+            amount={Number(bid[1]).toFixed(5)}
+          />);
+        })}
+      </div>
     </div>
   );
 }
