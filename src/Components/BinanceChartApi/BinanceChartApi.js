@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import './BinanceSignIn.scss'
+import './BinanceChartApi.scss'
 import axios from 'axios';
-import BinanceBids from './BinanceBids';
+import BinanceHistory from './BinanceHistory';
 
-function BinanceApi() {
+function BinanceChartApi() {
 
   const [history, setHistory] = useState([]);
 
@@ -20,20 +20,23 @@ function BinanceApi() {
   }, []);
 
   return (
-    <div className='price-change'>
-      <div>
+    <div className='sell-history'>
+      <h1 className='currency-name'>BTC / USDT</h1>
+      <div className='sell-chart bid'>
         <h1>Bid</h1>
         {history.bids && history.bids.slice(0,10).map(bid => {
-          return (<BinanceBids
+          return (<BinanceHistory
+            isBid={1}
             price={Number(bid[0]).toFixed(2)}
             amount={Number(bid[1]).toFixed(5)}
           />);
         })}
       </div>
-      <div>
+      <div className='sell-chart ask'>
         <h1>Ask</h1>
         {history.asks && history.asks.slice(0,10).map(bid => {
-          return (<BinanceBids
+          return (<BinanceHistory
+            isBid={0}
             price={Number(bid[0]).toFixed(2)}
             amount={Number(bid[1]).toFixed(5)}
           />);
@@ -43,4 +46,4 @@ function BinanceApi() {
   );
 }
 
-export default BinanceApi;
+export default BinanceChartApi;
