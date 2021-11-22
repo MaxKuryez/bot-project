@@ -1,3 +1,8 @@
+
+# https://api.binance.com/api/v3/ticker/price - just load whole file (or find a way to make it weigh less)
+# https://api.binance.com/api/v3/exchangeInfo?symbol=BNBBTC - with limits, file too big
+# TradingView - api for view
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
