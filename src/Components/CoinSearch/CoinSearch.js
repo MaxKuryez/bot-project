@@ -24,13 +24,14 @@ function CoinSearch() {
   }, []);
 
   const handleChange = e => {
-    setSearch(e.target.value);
+    setSearch(e.target.value.replace(/\//g, ''));
   };
 
   const filteredCoins = searchForCoin(coins);
 
   function searchForCoin(coins) {
     let results = [];
+
     Array.isArray(coins) && coins.forEach(function (coin, index) {
       if (coin && typeof coin.symbol === 'string' && coin.symbol.toLowerCase().includes(search.toLowerCase())) {
         if ( coin.symbol.startsWith(search) ) {
@@ -40,7 +41,9 @@ function CoinSearch() {
         }
       }
     });
-    //console.log(results);
+
+    results = results.slice(0,20);
+
     return results;
   }
 
@@ -68,11 +71,11 @@ function CoinSearch() {
             </div>
           </div>
         </div>
-      {filteredCoins.slice(0, 20).map(coin => {
+      {filteredCoins.map(coin => {
         return (
           <Coin
             name={coin.symbol}
-            price={coin.price}
+            price={coin.price.replace(/(\.0+|0+)$/, '')}
           />
         );
       })} </>) : <><div>No results</div></> }
