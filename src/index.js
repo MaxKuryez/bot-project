@@ -4,7 +4,9 @@ import './index.scss';
 import Routs from './View/Routs'
 
 ReactDOM.render(
-    <Routs/>,
+  <React.StrictMode>
+    <Routs/>
+  </React.StrictMode>,
   document.getElementById('root')
 );
 

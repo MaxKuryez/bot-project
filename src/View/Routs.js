@@ -29,7 +29,7 @@ export default function Routs() {
         </ul>
 
         <Routes>
-          <Route path="/:id" element={<Child />} />
+          <Route path="/:symbolId" element={<Child />} />
           <Route exact path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/dashboard" element={<Dashboard />} />
@@ -40,12 +40,12 @@ export default function Routs() {
 }
 
 function Child() {
-  let { id } = useParams();
+  let { symbolId } = useParams();
 
   return (
     <div>
-      <h3>ID: {id}</h3>
-      <BinanceChartApi/>
+      <h3>ID: {symbolId}</h3>
+      <BinanceChartApi symbol={symbolId}/>
     </div>
   );
 }

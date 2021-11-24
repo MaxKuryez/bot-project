@@ -3,14 +3,15 @@ import './BinanceChartApi.scss'
 import axios from 'axios';
 import BinanceHistory from './BinanceHistory';
 
-function BinanceChartApi() {
+function BinanceChartApi(coin) {
 
   const [history, setHistory] = useState([]);
+  const symbol = coin.symbol.slice(6).toUpperCase();
 
   useEffect(() => {
     const interval = setInterval(() => {
       axios.get(
-          'https://api.binance.com/api/v3/depth?symbol=BTCUSDT')
+          'https://api.binance.com/api/v3/depth?symbol=' + symbol)
         .then(res => {
           setHistory(res.data);
           console.log(res.data);
@@ -21,7 +22,7 @@ function BinanceChartApi() {
 
   return (
     <div className='sell-history'>
-      <h1 className='currency-name'>BTC / USDT</h1>
+      <h1 className='currency-name'>{symbol}</h1>
       <div className='sell-chart bid'>
         <h1>Bid</h1>
         {history.bids && history.bids.slice(0,10).map(bid => {

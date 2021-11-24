@@ -1,4 +1,6 @@
 import React from 'react';
+import Routs from '../../View/Routs';
+import { Link } from "react-router-dom";
 
 const Coin = ({
   name,
@@ -6,6 +8,7 @@ const Coin = ({
 }) => {
   return (
     <div className='coin-container'>
+      <Link to={'/watch-' + name.toLowerCase()}>
       <div className='coin-row'>
         <div className='coin'>
           <h1>{name}</h1>
@@ -14,6 +17,7 @@ const Coin = ({
           <p className='coin-price'>${price}</p>
         </div>
       </div>
+      </Link>
     </div>
   );
 };
