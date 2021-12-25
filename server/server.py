@@ -2,7 +2,7 @@ from flask import Flask
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/signin")
 def members():
     return {"address": ["name", "surname", "street"]}
 

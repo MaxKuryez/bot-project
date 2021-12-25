@@ -1,61 +1,48 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './SignIn.scss';
 
-class SignIn extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      passowrd: '',
-    };
+function SignIn() {
 
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  const [data, setData] = useState([{}]);
 
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
+  useEffect (() => {
+    fetch("/signin").then(
+      res => res.json()
+    ).then(
+      data => {
+        setData(data);
+        console.log(data);
+      }
+    )
+  }, [])
 
-    this.setState({
-      [name]: value
-    });
-  }
-
-  handleSubmit(event) {
-    alert('An essay was submitted: ' + this.state.email + ' ' + this.state.passowrd);
-    event.preventDefault();
-  }
-
-  render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Email:
-          <input
-            name="email"
-            type="text"
-            maxLength="20"
-            checked={this.state.isGoing}
-            onChange={this.handleInputChange} />
-        </label>
-        <label>
-          Passowrd:
-          <input
-            name="passowrd"
-            type="text"
-            maxLength="20"
-            checked={this.state.passowrd}
-            onChange={this.handleInputChange} />
-        </label>
-        <br />
-        <label>
-          <input type="submit" value="Submit" />
-        </label>
-      </form>
+      <div className="form-container-signin">
+        <form id="signin">
+          <div className="signin-input">
+            <div className="signin-labels">
+              <p>Email:</p>
+              <p>Passowrd:</p>
+            </div>
+            <div className="signin-fields">
+              <input
+                name="email"
+                type="text"
+                maxLength="20" />
+              <input
+                name="passowrd"
+                type="text"
+                maxLength="20" />
+            </div>
+          </div>
+          <br />
+          <div className="sigin-submit">
+            <input type="submit" value="Submit" />
+          </div>
+        </form>
+      </div>
     );
   }
-}
+
 
 export default SignIn;

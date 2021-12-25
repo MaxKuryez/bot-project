@@ -1,0 +1,31 @@
+.form-container-signin {
+  #signin {
+    margin: 0 auto; 
+    width: 274px;
+    .signin-input {
+      display: flex;
+      .signin-labels {
+        p {
+          margin-bottom: 10px;
+          margin-top: 5px;
+        }
+      }
+      .signin-fields {
+        margin-left: 20px;
+        input {
+          margin-bottom: 10px;
+          background-color: #AE85E3;
+          padding: 2px;
+        }
+      }
+    }
+    .sigin-submit {
+      text-align: center;
+      input {
+        padding: 5px 15px 5px 15px;
+        color: white;
+        background-color: #450E8D;
+      }
+    }
+  }
+}
