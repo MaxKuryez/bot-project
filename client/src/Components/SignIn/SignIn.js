@@ -1,48 +1,73 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from "react";
+import jquery from 'jquery';
 import './SignIn.scss';
 
-function SignIn() {
+const lrconfig = {
+  apiKey: process.env.REACT_APP_API_KEY, //LoginRadius API key
+};
 
-  const [data, setData] = useState([{}]);
+let loginradius = {};
 
-  useEffect (() => {
-    fetch("/signin").then(
-      res => res.json()
-    ).then(
-      data => {
-        setData(data);
-        console.log(data);
-      }
-    )
-  }, [])
+jquery(window).on('load', function() {
+  if (window.LoginRadiusV2) {
+    loginradius = new window.LoginRadiusV2(lrconfig);
+    loginradius.api.init(lrconfig);
+    jquery( ".sigin-submit" ).css( "display", "block" );
+  }
+});
 
-    return (
+const LoginButton = () => {
+  const loginButtonHandler = () => {
+    loginradius.api.login({
+      emailid: emailValue,
+      password: passwordValue
+    },
+    (successResponse) => {
+      //Here you will get the access Token of 
+      console.log(successResponse);
+    },
+    (errors) => {
+      console.log(errors);
+    });
+  }
+
+  const [emailValue, updateEmailValue] = useState("");
+  const [passwordValue, updatePasswordValue] = useState("");
+
+  return (
+    <>
       <div className="form-container-signin">
-        <form id="signin">
+        <div id="signin">
           <div className="signin-input">
             <div className="signin-labels">
               <p>Email:</p>
               <p>Passowrd:</p>
             </div>
             <div className="signin-fields">
-              <input
+              <input type="text"
+                value={emailValue}
+                onChange={(e) => { updateEmailValue(e.target.value) }}
+                placeholder={"email"}
                 name="email"
                 type="text"
-                maxLength="20" />
-              <input
+                maxLength="20"/>
+              <input type="password"
+                value={passwordValue}
+                onChange={(e) => { updatePasswordValue(e.target.value) }}
+                placeholder={"Password"}
                 name="passowrd"
                 type="text"
-                maxLength="20" />
+                maxLength="20"/>
             </div>
           </div>
           <br />
-          <div className="sigin-submit">
-            <input type="submit" value="Submit" />
+          <div className="sigin-submit" style={{display: "none"}}>
+            <button onClick={() => loginButtonHandler()}>Log In</button>
           </div>
-        </form>
+        </div>
       </div>
-    );
-  }
+    </>
+  );
+};
 
-
-export default SignIn;
+export default LoginButton;
