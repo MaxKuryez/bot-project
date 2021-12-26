@@ -8,7 +8,6 @@ ReactDOM.render(
   <React.StrictMode>
     <Helmet>
       <script type="text/javascript" src="https://auth.lrcontent.com/v2/LoginRadiusV2.js"></script>
-      <script type="text/javascript" src="./Configurations/sign-in-api-key.js"></script>
     </Helmet>
     <Routs/>
   </React.StrictMode>,

@@ -9,6 +9,7 @@ import {
 import BinanceChartApi from '../Components/BinanceChartApi/BinanceChartApi';
 import CoinSearch from '../Components/CoinSearch/CoinSearch';
 import SignIn from '../Components/SignIn/SignIn';
+import MyAccount from '../Components/MyAccount/MyAccount';
 
 export default function Routs() {
   return (
@@ -27,7 +28,7 @@ export default function Routs() {
           <Route path="/:symbolId" element={<Child />} />
           <Route exact path="/" element={<Home />} />
           <Route path="/signin" element={<Signin />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/myaccount" element={<Myaccount />} />
         </Routes>
       </div>
     </Router>
@@ -60,10 +61,10 @@ function Signin() {
   );
 }
 
-function Dashboard() {
+function Myaccount() {
   return (
     <div>
-      <h2>Dashboard</h2>
+      <MyAccount/>
     </div>
   );
 }

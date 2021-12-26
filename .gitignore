@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 
+client/node_modules/.cache
 # testing
 /coverage
 
@@ -13,6 +14,7 @@
 
 #API keys
 /client/.env
+
 # misc
 .DS_Store
 .env.local
