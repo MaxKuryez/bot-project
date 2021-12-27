@@ -87,14 +87,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-Login: login radius, test@test.com, asdasdA1!
+login radius: test@test.com, asdasdA1!
 
-/client/src/Configurations/sign-in-api-key.json
-add credentials :
-{
-    "signInKey" : {
-        "appName": "",
-        "APIKey": "",
-        "APISecret": ""
-    }
-}
+Credentials stored in .env

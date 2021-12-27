@@ -20,9 +20,10 @@ export default function Routs() {
           <li>
             <Link to="/">Home</Link>
           </li>
-          <li>
-            <Link to="/signin">Signin</Link>
-          </li>
+          { !localStorage.getItem('user_token') ?
+            <><li><Link to="/signin">Signin</Link></li></> :
+            <><li><a href="/myaccount">MyAccount</a></li></>
+          }
           <li>
             <SignOutButton/>
           </li>
