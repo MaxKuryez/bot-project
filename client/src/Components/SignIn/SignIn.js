@@ -27,12 +27,11 @@ const LoginButton = () => {
         password: passwordValue
       },
       (successResponse) => {
-        //Here you will get the access Token of 
+        localStorage.setItem('user_email', successResponse.Profile.Email[0].Value);
+        localStorage.setItem('user_token', successResponse.access_token);
         console.log(successResponse);
-        localStorage.setItem('user_token', successResponse.Profile.Email[0].Value);
-        console.log(localStorage.user_token);
-        console.log(successResponse.Profile.Email[0]);
         navigate('/myaccount');
+        window.location.reload(false);
       },
       (errors) => {
         console.log(errors);
@@ -49,8 +48,8 @@ const LoginButton = () => {
         <div id="signin">
           <div className="signin-input">
             <div className="signin-labels">
-              <p>Email:</p>
-              <p>Passowrd:</p>
+              <p>Email: test@test.com</p>
+              <p>Passowrd: asdasdA1!</p>
             </div>
             <div className="signin-fields">
               <input type="text"

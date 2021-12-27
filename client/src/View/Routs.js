@@ -10,6 +10,7 @@ import BinanceChartApi from '../Components/BinanceChartApi/BinanceChartApi';
 import CoinSearch from '../Components/CoinSearch/CoinSearch';
 import SignIn from '../Components/SignIn/SignIn';
 import MyAccount from '../Components/MyAccount/MyAccount';
+import SignOutButton from '../Components/SignOutButton/SignOutButton';
 
 export default function Routs() {
   return (
@@ -21,6 +22,9 @@ export default function Routs() {
           </li>
           <li>
             <Link to="/signin">Signin</Link>
+          </li>
+          <li>
+            <SignOutButton/>
           </li>
         </ul>
 
