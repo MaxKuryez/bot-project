@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import jquery from 'jquery';
 import { useNavigate } from 'react-router-dom';
 import './MyAccount.scss';
-import SignIn from '../SignIn/SignIn';
+import AccountStockChart from './AccountStockChart';
 
   let loginradius = {};
   const lrconfig = {
@@ -46,8 +46,9 @@ function MyAccount() {
 
   if (user) {
     return (
-      <div className='my-account'>
+      <div className="my-account">
         <h1>Hi {user}, this is your account!</h1>
+        <AccountStockChart/>
       </div>
     );
   }

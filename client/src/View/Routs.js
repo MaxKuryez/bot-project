@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Link,
   useParams
-} from "react-router-dom";
+} from 'react-router-dom';
 import BinanceChartApi from '../Components/BinanceChartApi/BinanceChartApi';
 import CoinSearch from '../Components/CoinSearch/CoinSearch';
 import SignIn from '../Components/SignIn/SignIn';
