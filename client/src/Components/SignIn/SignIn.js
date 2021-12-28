@@ -46,10 +46,11 @@ const LoginButton = () => {
     <>
       <div className="form-container-signin">
         <div id="signin">
+          <div className="test-message">( Testing, u: test@test.com, p: asdasdA1! )</div>
           <div className="signin-input">
             <div className="signin-labels">
-              <p>Email: test@test.com</p>
-              <p>Passowrd: asdasdA1!</p>
+              <p>Email:</p>
+              <p>Passowrd:</p>
             </div>
             <div className="signin-fields">
               <input type="text"

@@ -2,6 +2,10 @@
   #signin {
     margin: 0 auto; 
     width: 274px;
+    .test-message {
+      width: 330px;
+      margin-bottom: 15px;
+    }
     .signin-input {
       display: flex;
       .signin-labels {

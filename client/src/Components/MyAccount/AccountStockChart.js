@@ -25,10 +25,7 @@ function AccountStockChart() {
 
   return (
     <div className="stock-chart">
-      <div class="tooltip">Hover over me
-  <span class="tooltiptext">Tooltip text</span>
-</div>
-      <h1>Chart</h1>
+      <h1 className="portfolio-label">Portfolio</h1>
       <PieChart width={400} height={400}>
       <Pie
         data={data}
