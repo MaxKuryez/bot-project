@@ -30,7 +30,7 @@ export default function Routs() {
         </ul>
 
         <Routes>
-          <Route path="/:symbolId" element={<Child />} />
+          <Route path="/watch-coin" element={<WatchCoin />} />
           <Route exact path="/" element={<Home />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/myaccount" element={<Myaccount />} />
@@ -40,13 +40,10 @@ export default function Routs() {
   );
 }
 
-function Child() {
-  let { symbolId } = useParams();
-
+function WatchCoin() {
   return (
     <div>
-      <h3>ID: {symbolId}</h3>
-      <BinanceChartApi symbol={symbolId}/>
+      <BinanceChartApi/>
     </div>
   );
 }

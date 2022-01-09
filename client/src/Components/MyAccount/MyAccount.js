@@ -36,6 +36,7 @@ function MyAccount() {
                 console.log(errors);
                 localStorage.setItem('user_email', '');
                 localStorage.setItem('user_token', '');
+                localStorage.setItem('Uid', '');
                 navigate('/signin');
                 window.location.reload(false);
               }

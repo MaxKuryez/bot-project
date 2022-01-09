@@ -29,6 +29,7 @@ const LoginButton = () => {
       (successResponse) => {
         localStorage.setItem('user_email', successResponse.Profile.Email[0].Value);
         localStorage.setItem('user_token', successResponse.access_token);
+        localStorage.setItem('Uid', successResponse.Profile.Uid);
         console.log(successResponse);
         navigate('/myaccount');
         window.location.reload(false);

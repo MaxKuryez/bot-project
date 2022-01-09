@@ -34,6 +34,7 @@ const SignOutButton = () => {
     );
     localStorage.setItem('user_email', '');
     localStorage.setItem('user_token', '');
+    localStorage.setItem('Uid', '');
     window.location.reload(false);
     }
   }
