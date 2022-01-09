@@ -3,6 +3,8 @@ import jquery from 'jquery';
 import { useNavigate } from 'react-router-dom';
 import './MyAccount.scss';
 import AccountStockChart from './AccountStockChart';
+import db from './Firebase';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 
   let loginradius = {};
   const lrconfig = {
@@ -12,6 +14,7 @@ import AccountStockChart from './AccountStockChart';
 function MyAccount() {
   const [user, setUser] = useState();
   const navigate = useNavigate();
+  const [userData, setUserData] = useState({});
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem('user_email');
@@ -28,9 +31,7 @@ function MyAccount() {
             userToken,
               (successResponse)=>{
                 console.log(successResponse);
-                if (loggedInUser) {
-                  setUser(loggedInUser);
-                }
+                fetchUserData();
               },
               (errors) => {
                 console.log(errors);
@@ -45,17 +46,33 @@ function MyAccount() {
     });
   }, []);
 
-  if (user) {
+
+  function fetchUserData() {
+      const userDataTemp = {};
+      const Uid = localStorage.getItem('Uid')
+      const q = query(collection(db, 'account'), where('Uid', "==", Uid));
+      const querySnapshot = getDocs(q)
+      .then(querySnapshot => {
+        querySnapshot.forEach((doc) => {
+          userDataTemp.Uid = doc.data().Uid;
+          userDataTemp.email = doc.data().email;
+          userDataTemp.name = doc.data().name;
+          setUserData(userDataTemp);
+          console.log(doc.id, " => ", doc.data());
+        });
+      });
+  }
+
+  if (userData.name) {
     return (
       <div className="my-account">
-        <h1>Hi {user}, this is your account!</h1>
+        <h1>Hi {userData.name}, this is your account!</h1>
         <AccountStockChart/>
       </div>
     );
   }
 
   return (null);
-
 }
 
 export default MyAccount;
