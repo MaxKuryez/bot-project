@@ -89,4 +89,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 login radius: test@test.com, asdasdA1!
 
-Credentials stored in .env
+Credentials stored in client/.env

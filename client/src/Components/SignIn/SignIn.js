@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import jquery from 'jquery';
 import './SignIn.scss';
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +11,14 @@ let loginradius = {};
 
 const LoginButton = () => {
   const navigate = useNavigate();
+  const [emailValue, updateEmailValue] = useState('');
+  const [passwordValue, updatePasswordValue] = useState('');
+
+  useEffect(() => {
+    if (localStorage.getItem('user_token')) {
+      navigate('/myaccount');
+    }
+  }, []);
 
   jquery(window).on('load', function() {
     if (window.LoginRadiusV2) {
@@ -20,7 +28,6 @@ const LoginButton = () => {
   });
 
   const loginButtonHandler = () => {
-
     if (loginradius && loginradius.api) {
       loginradius.api.login({
         emailid: emailValue,
@@ -39,9 +46,6 @@ const LoginButton = () => {
       });
     }
   }
-
-  const [emailValue, updateEmailValue] = useState("");
-  const [passwordValue, updatePasswordValue] = useState("");
 
   return (
     <>
