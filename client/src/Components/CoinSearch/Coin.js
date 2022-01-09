@@ -8,13 +8,13 @@ const Coin = ({
 }) => {
   return (
     <div className='coin-container'>
-      <Link to={'/watch-' + name.toLowerCase()}>
+      <Link to={'/watch-coin?symbol=' + name}>
       <div className='coin-row'>
         <div className='coin'>
           <h1>{name}</h1>
         </div>
         <div className='coin-data'>
-          <p className='coin-price'>${price}</p>
+          <p className='coin-price'>{price}</p>
         </div>
       </div>
       </Link>

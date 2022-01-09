@@ -1,13 +1,16 @@
-import React from "react";
+import React from 'react';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Link,
   useParams
-} from "react-router-dom";
+} from 'react-router-dom';
 import BinanceChartApi from '../Components/BinanceChartApi/BinanceChartApi';
 import CoinSearch from '../Components/CoinSearch/CoinSearch';
+import SignIn from '../Components/SignIn/SignIn';
+import MyAccount from '../Components/MyAccount/MyAccount';
+import SignOutButton from '../Components/SignOutButton/SignOutButton';
 
 export default function Routs() {
   return (
@@ -17,35 +20,30 @@ export default function Routs() {
           <li>
             <Link to="/">Home</Link>
           </li>
+          { !localStorage.getItem('user_token') ?
+            <><li><a href="/signin">Signin</a></li></> :
+            <><li><a href="/myaccount">MyAccount</a></li></>
+          }
           <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/btc">BTC</Link>
-          </li>
-          <li>
-            <Link to="/eth">ETH</Link>
+            <SignOutButton/>
           </li>
         </ul>
 
         <Routes>
-          <Route path="/:symbolId" element={<Child />} />
+          <Route path="/watch-coin" element={<WatchCoin />} />
           <Route exact path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/myaccount" element={<Myaccount />} />
         </Routes>
       </div>
     </Router>
   );
 }
 
-function Child() {
-  let { symbolId } = useParams();
-
+function WatchCoin() {
   return (
     <div>
-      <h3>ID: {symbolId}</h3>
-      <BinanceChartApi symbol={symbolId}/>
+      <BinanceChartApi/>
     </div>
   );
 }
@@ -59,18 +57,16 @@ function Home() {
   );
 }
 
-function About() {
+function Signin() {
   return (
-    <div>
-      <h2>About</h2>
-    </div>
+    <SignIn/>
   );
 }
 
-function Dashboard() {
+function Myaccount() {
   return (
     <div>
-      <h2>Dashboard</h2>
+      <MyAccount/>
     </div>
   );
 }

@@ -1,0 +1,31 @@
+.recharts-layer {
+  path {
+    :hover {
+      color: red;
+    }
+  }
+}
+.recharts-default-tooltip {
+  padding: 0px !important;
+  border: none !important;
+  .recharts-tooltip-label {
+    background-color: darkorchid !important;
+  }
+  .recharts-tooltip-item {
+    color: white !important;
+    background-color: darkorchid !important;
+    margin: 1px;
+    &-name {
+      background-color: darkorchid !important;
+    }
+    &-separator {
+      background-color: darkorchid !important;
+    }
+    &-value {
+      background-color: darkorchid !important;
+    }
+    &-unit {
+      background-color: darkorchid !important;
+    }
+  }
+}

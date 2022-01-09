@@ -1,61 +1,83 @@
-import React from 'react';
+import React, { useState } from "react";
+import jquery from 'jquery';
 import './SignIn.scss';
+import { useNavigate } from 'react-router-dom';
 
-class SignIn extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      passowrd: '',
-    };
+const lrconfig = {
+  apiKey: process.env.REACT_APP_API_KEY, //LoginRadius API key
+};
 
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+let loginradius = {};
+
+const LoginButton = () => {
+  const navigate = useNavigate();
+
+  jquery(window).on('load', function() {
+    if (window.LoginRadiusV2) {
+      loginradius = new window.LoginRadiusV2(lrconfig);
+      loginradius.api.init(lrconfig);
+    }
+  });
+
+  const loginButtonHandler = () => {
+
+    if (loginradius && loginradius.api) {
+      loginradius.api.login({
+        emailid: emailValue,
+        password: passwordValue
+      },
+      (successResponse) => {
+        localStorage.setItem('user_email', successResponse.Profile.Email[0].Value);
+        localStorage.setItem('user_token', successResponse.access_token);
+        localStorage.setItem('Uid', successResponse.Profile.Uid);
+        console.log(successResponse);
+        navigate('/myaccount');
+        window.location.reload(false);
+      },
+      (errors) => {
+        console.log(errors);
+      });
+    }
   }
 
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
+  const [emailValue, updateEmailValue] = useState("");
+  const [passwordValue, updatePasswordValue] = useState("");
 
-    this.setState({
-      [name]: value
-    });
-  }
+  return (
+    <>
+      <div className="form-container-signin">
+        <div id="signin">
+          <div className="test-message">( Testing, u: test@test.com, p: asdasdA1! )</div>
+          <div className="signin-input">
+            <div className="signin-labels">
+              <p>Email:</p>
+              <p>Passowrd:</p>
+            </div>
+            <div className="signin-fields">
+              <input type="text"
+                value={emailValue}
+                onChange={(e) => { updateEmailValue(e.target.value) }}
+                placeholder={"email"}
+                name="email"
+                type="text"
+                maxLength="20"/>
+              <input type="password"
+                value={passwordValue}
+                onChange={(e) => { updatePasswordValue(e.target.value) }}
+                placeholder={"Password"}
+                name="passowrd"
+                type="text"
+                maxLength="20"/>
+            </div>
+          </div>
+          <br />
+          <div className="sigin-submit">
+            <button onClick={() => loginButtonHandler()}>Log In</button>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
 
-  handleSubmit(event) {
-    alert('An essay was submitted: ' + this.state.email + ' ' + this.state.passowrd);
-    event.preventDefault();
-  }
-
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Email:
-          <input
-            name="email"
-            type="text"
-            maxLength="20"
-            checked={this.state.isGoing}
-            onChange={this.handleInputChange} />
-        </label>
-        <label>
-          Passowrd:
-          <input
-            name="passowrd"
-            type="text"
-            maxLength="20"
-            checked={this.state.passowrd}
-            onChange={this.handleInputChange} />
-        </label>
-        <br />
-        <label>
-          <input type="submit" value="Submit" />
-        </label>
-      </form>
-    );
-  }
-}
-
-export default SignIn;
+export default LoginButton;
